@@ -18,21 +18,42 @@ class App extends React.Component {
   }
 
   getNews = async (e) => {
+
+    const {
+      title
+    } = this.state;
+
     e.preventDefault()
     const search = e.target.elements.search.value
     const apiCall = await fetch('http://hn.algolia.com/api/v1/search?query=' + search);
     const data = await apiCall.json()
-    console.log(data.hits[0].title)
-    // const list = data.hits.map((pic))
+    // console.log(data.hits[0].title)
+    let results = data.hits
+
+    const mapThrough = results.map(function (officer) {
+      return officer.title
+      
+    });
+    // console.log(a)
+    // console.log(results)
+
+    title.push({
+      mapThrough
+    });
+
     
 
+    console.log(this.state)
+
     this.setState({
-      title: data.hits[0].title,
+      title: mapThrough,
       // author: ,
       // date: ,
       error: "",
       
     })
+    
+
     
   }
   render() {
