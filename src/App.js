@@ -1,74 +1,59 @@
 import React from "react";
+import './App.css';
+
+import { Provider } from 'react-redux'
+
+import store from './store'
+
 import Titles from "./components/Titles/Titles";
 import Form from "./components/Form/Form";
 import Display from "./components/Display/Display";
 
 
-// const App = () => <Search />;
-
-// export default App;
-
 class App extends React.Component {
 
   state = {
-    title: [],
-    // author: undefined,
-    // date: undefined,
-    error: undefined,
+    headlines: []
   }
 
   getNews = async (e) => {
-
-    const {
-      title
-    } = this.state;
 
     e.preventDefault()
     const search = e.target.elements.search.value
     const apiCall = await fetch('http://hn.algolia.com/api/v1/search?query=' + search);
     const data = await apiCall.json()
-    // console.log(data.hits[0].title)
     let results = data.hits
 
-    const mapThrough = results.map(function (officer) {
-      return officer.title
-      
+    const mapThrough = results
+    .map(function (a) {
+      return a.title
     });
-    // console.log(a)
-    // console.log(results)
-
-    title.push({
-      mapThrough
-    });
-
-    
-
-    console.log(this.state)
 
     this.setState({
-      title: mapThrough,
-      // author: ,
-      // date: ,
-      error: "",
-      
-    })
-    
-
-    
+      headlines: mapThrough      
+    })   
   }
+
   render() {
     
     return (
-    <div>
-      <Titles />
-      <Form getNews={this.getNews}/>
-      <Display
-        title={this.state.title}
-        error={this.state.error}
-      />
-    </div>
+      <Provider store={store}>
+        <div>
+          <Titles />
+          <Form getNews={this.getNews}/>
+          <hr />
+          <p>results</p>
+          <hr />
+          <Display
+            headlines={this.state.headlines}
+            error={this.state.error}
+          />
+        </div>
+      </Provider>
     )
   }
 }
+
+
 
 export default App;

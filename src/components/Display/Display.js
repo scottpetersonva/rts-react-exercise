@@ -1,17 +1,30 @@
 import React from "react";
 
 
+
+// const myMap = 
+
 class Display extends React.Component {
     
 
     render() {
         return (
             <div>
-                <ul>
-                    <li>
-                    {this.props.title}
-                    </li>
-                </ul>
+            <div>
+                {this.props.headlines[0]}
+            </div>
+            <div>
+                {this.props.headlines[1]}
+            </div>
+            <div>
+                {this.props.headlines[3]}
+            </div>
+            <div>
+                {this.props.headlines[4]}
+            </div>
+            <div>
+                {this.props.headlines[5]}
+            </div>
             </div>
         )
     }
@@ -20,18 +33,3 @@ class Display extends React.Component {
 }
 
 export default Display
-
-// import React from "react";
-
-// // Whenever we try to render an array containing JSX, React knows to render each JSX element separately
-// const List = props => (
-//   <ul>
-//     {props.groceries.map(item => (
-//       <li key={item.id}>
-//         {item.name}
-//       </li>
-//     ))}
-//   </ul>
-// );
-
-// export default List;
