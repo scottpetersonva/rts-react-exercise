@@ -1,2 +1,2 @@
 # rts-react-exercise
-An API querying app
+An API querying react app using the fetch method.
